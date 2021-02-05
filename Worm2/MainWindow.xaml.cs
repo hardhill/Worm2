@@ -20,9 +20,10 @@ namespace Worm2
     /// </summary>
     public partial class MainWindow : Window
     {
-        Worm worm;
+        private World world;
         Rectangle rect;
         int PosX = 0, PosY = 0;
+        private List<Apple> apples;
         public MainWindow()
         {
             InitializeComponent();
@@ -32,18 +33,13 @@ namespace Worm2
         private void MainForm_Loaded(object sender, RoutedEventArgs e)
         {
             //
-            rect = new Rectangle();
-            rect.Width = 8; rect.Height = 8;
-            rect.Fill = Brushes.DeepPink;
-            Field.Children.Add(rect);
-            Random random = new Random();
-            PosX = random.Next(141) * Convert.ToInt32(rect.Width);
-            PosY = random.Next(101) * Convert.ToInt32(rect.Height);
-            Canvas.SetLeft(rect, PosX); 
-            Canvas.SetTop(rect, PosY);
-            worm = new Worm();
-            worm.OnLivesChanged += Worm_OnLivesChanged;
+            world = new World();
+            world.SeedApple();
+            world.SeedWorm();
+            world.worm.OnLivesChanged += Worm_OnLivesChanged;
+            
         }
+
 
         private void Worm_OnLivesChanged(object obj, int lives,Directions direct, Vectors vector)
         {
@@ -77,7 +73,9 @@ namespace Worm2
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            worm.StartLive();
+            world.worm.StartLive();
         }
     }
+
+    
 }
