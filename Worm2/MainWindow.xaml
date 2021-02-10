@@ -5,18 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Worm2"
         mc:Ignorable="d"
-        Title="MainWindow" Height="800" Width="1200" Loaded="MainForm_Loaded">
-    <Grid Margin="0,0,10,-66">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="50"></RowDefinition>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition Width="110"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        <Canvas Name="Field" Width="1024" Height="800" Background="Beige" ></Canvas>
-        <Button x:Name="bStart" Grid.Row="0" Grid.Column="1" Margin="0,10,0,645" Click="Button_Click" HorizontalAlignment="Center" Width="25">Start</Button>
-        <Label x:Name="lblDirection" Content="North" Grid.Column="1" HorizontalAlignment="Center" Margin="0,154,0,0" VerticalAlignment="Top"/>
-    </Grid>
+        Title="MainWindow" Height="805" Width="1200" Loaded="MainForm_Loaded" BorderBrush="#FF6A6A6A" MinWidth="1200" MinHeight="805" ScrollViewer.VerticalScrollBarVisibility="Disabled" ResizeMode="CanMinimize">
+    <StackPanel Margin="0,0,0,0" Orientation="Horizontal">
+        <StackPanel Orientation="Vertical" Margin="0,10,0,0">
+            <Button x:Name="bStart" Margin="0" Click="Button_Click" HorizontalAlignment="Center" Width="90">Start</Button>
+            <Label x:Name="lblDirection" Content="North" HorizontalAlignment="Center" Margin="0,0,0,0" Height="26" />
+            <Label x:Name="lblLifes" Content="0" HorizontalAlignment="Center" Margin="0,5,0,0"/>
+            <Label x:Name="lblDist" Content="0" HorizontalAlignment="Center" Margin="0,5,0,0"/>
+        </StackPanel>
+        <Canvas Name="Field" Background="#FFE0F9F7" Margin="5,0,0,0" MinHeight="800" Height="800" Width="1140" />
+
+    </StackPanel>
 </Window>

@@ -82,6 +82,8 @@ namespace Worm2
                         lblDirection.Content = "EAST";
                         break;
                 }
+                lblLifes.Content = worm.Lives.ToString();
+                lblDist.Content = worm.Distance.ToString();
             }));
             
         }
