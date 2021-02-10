@@ -15,7 +15,7 @@
             <ColumnDefinition/>
             <ColumnDefinition Width="110"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Canvas Name="Field" Width="1024" Height="800" ></Canvas>
+        <Canvas Name="Field" Width="1024" Height="800" Background="Beige" ></Canvas>
         <Button x:Name="bStart" Grid.Row="0" Grid.Column="1" Margin="0,10,0,645" Click="Button_Click" HorizontalAlignment="Center" Width="25">Start</Button>
         <Label x:Name="lblDirection" Content="North" Grid.Column="1" HorizontalAlignment="Center" Margin="0,154,0,0" VerticalAlignment="Top"/>
     </Grid>

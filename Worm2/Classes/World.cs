@@ -8,8 +8,9 @@ namespace Worm2
     {
         private const int APPLES = 100;
         private List<Dictionary<String,Object>> Items;
-        private int Width = 140;
-        private int Height = 100;
+        public int Width { get; } = 140;
+        public int Height { get; }= 100;
+        public int Dimantion { get; } = 8;
 
         private Random random;
         
@@ -35,9 +36,7 @@ namespace Worm2
         public void SeedWorm()
         {
             Worm worm = new Worm();
-            int X = random.Next(141);
-            int Y = random.Next(101);
-            Items.Add(new Dictionary<string, object>(){{"worm",worm},{"X",X}, {"Y",Y}});
+            Items.Add(new Dictionary<string, object>(){{"worm",worm}});
         }
 
         public Worm worm
@@ -47,6 +46,13 @@ namespace Worm2
                 Worm worm = Items.Find(i=>i.ContainsKey("worm")).First().Value as Worm;
                 return worm;
             }
+        }
+
+        public (int PosX, int PosY) RandomPosition()
+        {
+            int X = random.Next(141);
+            int Y = random.Next(101);
+            return (X, Y);
         }
     }
 }

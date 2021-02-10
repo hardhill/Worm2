@@ -21,9 +21,7 @@ namespace Worm2
     public partial class MainWindow : Window
     {
         private World world;
-        Rectangle rect;
-        int PosX = 0, PosY = 0;
-        private List<Apple> apples;
+        Rectangle _rectangle;
         public MainWindow()
         {
             InitializeComponent();
@@ -32,26 +30,43 @@ namespace Worm2
 
         private void MainForm_Loaded(object sender, RoutedEventArgs e)
         {
-            //
+            // создадим мир
             world = new World();
+            //посеем яблоки
             world.SeedApple();
+            //родим червя
             world.SeedWorm();
+            (world.worm.PosX,world.worm.PosY) = world.RandomPosition();
             world.worm.OnLivesChanged += Worm_OnLivesChanged;
+            _rectangle = new Rectangle();
             
+            _rectangle.Width = world.worm.SizeHead;
+            _rectangle.Height = world.worm.SizeHead;
+            _rectangle.Fill = world.worm.Color;
+            Field.Children.Add(_rectangle);
+            Canvas.SetLeft(_rectangle,-100);
+            
+
         }
 
 
-        private void Worm_OnLivesChanged(object obj, int lives,Directions direct, Vectors vector)
+        private void Worm_OnLivesChanged(object obj, Directions direct, int posx, int posy)
         {
-            Application.Current.Dispatcher.Invoke(new Action(() => {
-                
-                if (PosX < 800 && PosX > 0 && PosY > 0 && PosY < 1120)
+            Application.Current.Dispatcher.Invoke(new Action(() =>
+            {
+
+                Worm worm = (obj as Worm);
+                if (posx < 0)
                 {
-                    PosX = PosX + vector.X * Convert.ToInt32(rect.Width);
-                    PosY = PosY + vector.Y * Convert.ToInt32(rect.Height);
-                    Canvas.SetLeft(rect, PosX);
-                    Canvas.SetTop(rect, PosY);
+                    posx = world.Width + posx + 1;
+                }else if (posx > world.Width)
+                {
+                    posx = posx - world.Width - 1;
                 }
+                worm.PosX = posx;
+                Canvas.SetLeft(_rectangle,worm.PosX*world.Dimantion);
+                Canvas.SetTop(_rectangle,worm.PosY*world.Dimantion);
+                    
                 switch (direct)
                 {
                     case Directions.North:
