@@ -33,20 +33,34 @@ namespace Worm2
             // создадим мир
             world = new World();
             //посеем яблоки
-            world.SeedApple();
+            world.SeedApples();
             //родим червя
             world.SeedWorm();
-            (world.worm.PosX,world.worm.PosY) = world.RandomPosition();
-            world.worm.OnLivesChanged += Worm_OnLivesChanged;
-            _rectangle = new Rectangle();
+            world.Worm.OnLivesChanged += Worm_OnLivesChanged;
             
-            _rectangle.Width = world.worm.SizeHead;
-            _rectangle.Height = world.worm.SizeHead;
-            _rectangle.Fill = world.worm.Color;
+            _rectangle = new Rectangle();
+            _rectangle.Width = world.Worm.SizeHead;
+            _rectangle.Height = world.Worm.SizeHead;
+            _rectangle.Fill = world.Worm.Color;
             Field.Children.Add(_rectangle);
             Canvas.SetLeft(_rectangle,-100);
-            
+            UpdateApple(world,Field);
 
+        }
+
+        private void UpdateApple(World world,Canvas field)
+        {
+                var apples = world.Apples;
+                foreach (var apple in apples)
+                {
+                    Rectangle rect = new Rectangle();
+                    rect.Fill = apple.Color;
+                    rect.Width = 8;
+                    rect.Height = 8;
+                    field.Children.Add(rect);
+                    Canvas.SetLeft(rect,apple.PosX*world.Dimantion);
+                    Canvas.SetTop(rect,apple.PosY*world.Dimantion);
+                }
         }
 
 
@@ -64,6 +78,14 @@ namespace Worm2
                     posx = posx - world.Width - 1;
                 }
                 worm.PosX = posx;
+                if (posy < 0)
+                {
+                    posy = world.Height + posy + 1;
+                }else if (posy > world.Height)
+                {
+                    posy = posy - world.Height - 1;
+                }
+                worm.PosY = posy;
                 Canvas.SetLeft(_rectangle,worm.PosX*world.Dimantion);
                 Canvas.SetTop(_rectangle,worm.PosY*world.Dimantion);
                     
@@ -90,7 +112,7 @@ namespace Worm2
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            world.worm.StartLive();
+            world.Worm.StartLive();
         }
     }
 

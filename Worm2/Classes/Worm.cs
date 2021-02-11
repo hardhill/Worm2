@@ -109,5 +109,14 @@ namespace Worm2
             }
             return Vector;
         }
+
+        private void FrontView()
+        {
+            switch (Direction)
+            {
+                case Directions.North:
+                    break;
+            }            
+        }
     }
 }
