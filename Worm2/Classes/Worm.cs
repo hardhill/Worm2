@@ -31,6 +31,7 @@ namespace Worm2
         public int Distance { get; private set; }
         private int DeltaDist;
         
+        private Eye eye; 
         
         //напрвление
         private Directions Direction { get; set; }
@@ -45,7 +46,12 @@ namespace Worm2
             Vector = new Vectors { X=0,Y=0};
             Color = Brushes.Brown;
             
+            eye = new Eye();
+
         }
+
+        
+
         public void StartLive()
         {
             timeout = new Timeout(() => {
@@ -78,7 +84,7 @@ namespace Worm2
 
         private Vectors ChangeDirection(Directions direction)
         {
-            
+            eye.Learning();
             Random random = new Random();
             int r = random.Next(2);
             switch (direction)
@@ -112,11 +118,7 @@ namespace Worm2
 
         private void FrontView()
         {
-            switch (Direction)
-            {
-                case Directions.North:
-                    break;
-            }            
+                         
         }
     }
 }

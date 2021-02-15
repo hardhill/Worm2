@@ -43,7 +43,8 @@ namespace Worm2
             _rectangle.Height = world.Worm.SizeHead;
             _rectangle.Fill = world.Worm.Color;
             Field.Children.Add(_rectangle);
-            Canvas.SetLeft(_rectangle,-100);
+            Canvas.SetLeft(_rectangle,world.Worm.PosX);
+            Canvas.SetTop(_rectangle, world.Worm.PosY);
             UpdateApple(world,Field);
 
         }
