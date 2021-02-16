@@ -56,9 +56,14 @@ namespace Worm2
             return (W1, W2, W3, W4);
         }
 
+        private void CorrectNeuron()
+        {
+            
+        }
         public void Learning()
         {
             ProcessNeuron();
+            CorrectNeuron();
         }
     }
 }
